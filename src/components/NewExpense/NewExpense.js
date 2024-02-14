@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 //import './NewExpense.css';
 import Form from './ExpenseForm';
+import './NewExpense.css'
 
 function NewExpense(props){
   const [isEditting, setIsEditting] = useState(false);
@@ -27,7 +28,7 @@ function NewExpense(props){
 
 /*return conditional content */
   return (
-    <div>
+    <div className='new-expense'>
         {!isEditting && <button onClick={clickHandler}>Add New Expense</button>}
         {isEditting && <Form onSaveExpenseData={saveExpenseDataHandler} onCancel={stopEditingHandler} />}
     </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './ExpenseForm.css'
 
 
 const ExpenseForm = (props) => {
@@ -11,19 +12,34 @@ const ExpenseForm = (props) => {
     const [enteredDate, setEnteredDate] = useState('');
     const [enteredName, setEnteredName] = useState('');
     const [enteredCost, setEnteredCost] = useState('');
+
+    const [dateIsValid, setDateIsValid] = useState(true);
+    const [nameIsValid, setNameIsValid] = useState(true);
+    const [costIsValid, setCostIsValid] = useState(true);
+
+
     
     //method1： individula change handler
     
     function dateChangeHandler(event){
+        if(event.target.value.trim().length > 0){
+            setDateIsValid(true);
+        }
         setEnteredDate(event.target.value);
     }
 
     function nameChangeHandler(event){
+        if(event.target.value.trim().length > 0){
+            setNameIsValid(true);
+        }
         setEnteredName(event.target.value);
 
     }
 
     function costChangeHandler(event){
+        if(event.target.value.trim().length > 0){
+            setCostIsValid(true);
+        }
         setEnteredCost(event.target.value);
     }
 
@@ -118,6 +134,28 @@ const ExpenseForm = (props) => {
 
     const submitHandler = (event) => {
         event.preventDefault();
+        if(enteredDate.trim().length === 0){
+            setDateIsValid(false);
+            if(enteredName.trim().length === 0){
+                setNameIsValid(false);
+            }
+            if(enteredCost.trim().length === 0){
+                setCostIsValid(false);
+            }
+
+            return;
+        }
+        if(enteredName.trim().length === 0){
+            setNameIsValid(false);
+            if(enteredCost.trim().length === 0){
+                setCostIsValid(false);
+            }
+            return;
+        }
+        if(enteredCost.trim().length === 0){
+            setCostIsValid(false);
+            return;
+        }
         const expenseData = {
             date: new Date(enteredDate),
             name: enteredName,
@@ -136,21 +174,23 @@ const ExpenseForm = (props) => {
 //two way binding: value={enteredDate}, value={enteredName}, value={enteredCost}
   return (
     <form onSubmit={submitHandler}>
-        <div>
-            <label htmlFor="date">Date:</label>
-            <input id="date" type="date" value={enteredDate} onChange={dateChangeHandler}/>
+        <div className='new-expense__controls'>
+            <div className={`new-expense__control ${!dateIsValid ? 'invalid': ''}`}>
+                <label htmlFor="date">Date:</label>
+                <input id="date" type="date" value={enteredDate} onChange={dateChangeHandler}/>
+            </div>
+            <div className={`new-expense__control ${!nameIsValid ? 'invalid': ''}`}>
+                <label htmlFor="name">Expense Name:</label>
+                <input id="name" type="text" value={enteredName} onChange={nameChangeHandler}/>
+            </div>
+            <div className={`new-expense__control ${!costIsValid ? 'invalid': ''}`}>
+                <label htmlFor="cost">Cost:</label>
+                <input id="cost" type="number" step='0.01' value={enteredCost} onChange={costChangeHandler}/>
+            </div>
         </div>
-        <div>
-            <label htmlFor="name">Expense Name:</label>
-            <input id="name" type="text" value={enteredName} onChange={nameChangeHandler}/>
-        </div>
-        <div>
-             <label htmlFor="cost">Cost:</label>
-            <input id="cost" type="number" value={enteredCost} onChange={costChangeHandler}/>
-        </div>
-        <div>
-            <button type='button' onClick={props.onCancel}>Cancel</button>
-            <button type='submit'>Add Expense</button>{/**button default type is submit, can be overmi */}
+        <div className='new-expense__actions'>
+                <button type='button' onClick={props.onCancel}>Cancel</button>
+                <button type='submit'>Add Expense</button>{/**button default type is submit, can be overmi */}
         </div>
     </form>
   )

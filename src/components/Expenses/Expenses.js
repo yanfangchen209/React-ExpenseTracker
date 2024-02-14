@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import ExpenseFilter from './ExpenseFilter'
 import { ExpenseList } from './ExpenseList';
 import ExpenseChart from './ExpenseChart';
+import './Expenses.css';
 
 export const Expenses = (props) => {
 
@@ -48,13 +49,10 @@ export const Expenses = (props) => {
         so finally we transfrom an array to an array of jsx element which can be rendered by react
         */
     return (
-    <div>
-        <div>
+        <div className='expenses'>
             <ExpenseFilter selected={filteredYear} onAddFilter={addFilter}/>
             <ExpenseChart expenses={filteredExpenseData} />
           {/* <span>{filterInfoText} data hidden</span>*/}  
-        </div>
-        <div>
             {/**rendering content conditionally, if expression befor && is true, the content after
              && will be executed.
             {filteredExpenseData.length === 0 && <p>No expenses found.</p>}
@@ -63,11 +61,8 @@ export const Expenses = (props) => {
             }
             */}
             {/**{expenseContent}*/}
-            <ExpenseList filteredData={filteredExpenseData} />
-
+            <ExpenseList filteredData={filteredExpenseData} onEdit={props.onEdit} onDelete={props.onDelete}/>
         </div>
-
-    </div>
 
   )
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import {useState} from 'react';
 import { ExpenseDate } from './ExpenseDate';
+import './ExpenseItem.css';
 
 //lift the state up
 
@@ -32,16 +33,21 @@ function ExpenseItem (props){
   function clickHandler(){
     setName("updated");
   }
+  function itemDeleteHandler(){
+    props.onDelete(props.id)
+  }
 
 
   return (
-    <div>    
-        <div><ExpenseDate date={props.date}/></div>
-        <div>{name}</div>
-        <div>${props.cost}</div>
-        <button onClick={clickHandler}>Edit name</button>
+    <div className='expense-item'>    
+        <ExpenseDate date={props.date}/>
+        <div className='expense-item__description'>
+          <h2>{name}</h2>
+          <div className='expense-item__price'>${props.cost}</div>
+        </div>
+        <button onClick={clickHandler}>Edit</button>
+        <button onClick={itemDeleteHandler}>Delete</button>
     </div>
-
   )
 }
 
