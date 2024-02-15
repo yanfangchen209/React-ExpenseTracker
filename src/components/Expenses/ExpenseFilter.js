@@ -1,15 +1,16 @@
 import React from 'react'
 import './ExpenseFilter.css';
 
-export const Filter = (props) => {
+//parent component: Expenses
+export const Filter = ({selected, onAddFilter}) => {
 
-    const selectHandler = (event) => {props.onAddFilter(event.target.value)}
+    const selectHandler = (event) => {onAddFilter(event.target.value)}
   return (
     <div className='expenses-filter'>
         <div className='expenses-filter__control'>
           <label>Filter by year</label>
           {/**two way binding: value={props.selected}  */}
-          <select value={props.selected} onChange={selectHandler}>
+          <select value={selected} onChange={selectHandler}>
               <option value="All">All</option>
               <option value="2019">2019</option>
               <option value="2020">2020</option>

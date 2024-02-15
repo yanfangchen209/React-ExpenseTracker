@@ -4,14 +4,15 @@ import { ExpenseList } from './ExpenseList';
 import ExpenseChart from './ExpenseChart';
 import './Expenses.css';
 
-export const Expenses = (props) => {
+//parent component:App
+export const Expenses = ({data, onEdit, onDelete}) => {
 
     const [filteredYear, setFilteredYear] = useState('All');
     let filteredExpenseData = [];
     if(filteredYear === 'All'){
-        filteredExpenseData = props.data;
+        filteredExpenseData = data;
     }else{
-        filteredExpenseData = props.data.filter(item => {return item.date.getFullYear().toString() === filteredYear});
+        filteredExpenseData = data.filter(item => {return item.date.getFullYear().toString() === filteredYear});
     }
 
     /*derived/computed state: when one state depends on another, we don't need to maintain another state,
@@ -48,7 +49,7 @@ export const Expenses = (props) => {
        /* convert each expenses array element into an ExpenseItem jsx element
         so finally we transfrom an array to an array of jsx element which can be rendered by react
         */
-    return (
+    return ( 
         <div className='expenses'>
             <ExpenseFilter selected={filteredYear} onAddFilter={addFilter}/>
             <ExpenseChart expenses={filteredExpenseData} />
@@ -61,7 +62,7 @@ export const Expenses = (props) => {
             }
             */}
             {/**{expenseContent}*/}
-            <ExpenseList filteredData={filteredExpenseData} onEdit={props.onEdit} onDelete={props.onDelete}/>
+            <ExpenseList filteredData={filteredExpenseData} onEdit={onEdit} onDelete={onDelete}/>
         </div>
 
   )

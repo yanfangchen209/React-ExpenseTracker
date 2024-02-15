@@ -1,18 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ExpenseItem from './ExpenseItem'
 import './ExpenseList.css'
 
+//parent component: Expenses
+export const ExpenseList = ({filteredData, onEdit, onDelete}) => {
+    
 
-export const ExpenseList = (props) => {
-    const [isEditing, setIsEditing] = useState(false);
-
-    if(props.filteredData.length === 0){
-        return <h2 className='expenses-list_fallback'>Found no expenses.</h2>
+    if(filteredData.length === 0){
+        return <h2 className='no-expenses-list'>Found no expenses.</h2>
     }
   return (
     <ul className='expenses-list'>
-        {props.filteredData.map(expense => 
-            <ExpenseItem key={expense.id} cost={expense.cost} date={expense.date} name={expense.name} id={expense.id} onDelete={props.onDelete} onEdit={props.onEdit} />
+        {filteredData.map(expense => 
+            <ExpenseItem key={expense.id} cost={expense.cost} date={expense.date} name={expense.name} id={expense.id} onDelete={onDelete} onEdit={onEdit} />
         )}
     </ul>
   )

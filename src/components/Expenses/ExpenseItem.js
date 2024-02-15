@@ -2,6 +2,7 @@ import React from 'react'
 import {useState} from 'react';
 import { ExpenseDate } from './ExpenseDate';
 import './ExpenseItem.css';
+import EditItem from './EditItem';
 
 //lift the state up
 
@@ -26,29 +27,53 @@ import './ExpenseItem.css';
   )
 }
  */
-function ExpenseItem (props){
 
-  const [name, setName] = useState(props.name);
+//parent component: ExpenseList
+function ExpenseItem ({cost, date, name, id, onDelete, onEdit}){
 
-  function clickHandler(){
-    setName("updated");
-  }
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleEditSave = (updatedExpense) => {
+    onEdit(id, updatedExpense);
+    setIsEditing(false);
+  };
+
+  const handleEditCancel = () => {
+    setIsEditing(false);
+  };
+
+
   function itemDeleteHandler(){
-    props.onDelete(props.id)
+    onDelete(id)
   }
 
 
   return (
-    <div className='expense-item'>    
-        <ExpenseDate date={props.date}/>
-        <div className='expense-item__description'>
-          <h2>{name}</h2>
-          <div className='expense-item__price'>${props.cost}</div>
-        </div>
-        <button onClick={clickHandler}>Edit</button>
-        <button onClick={itemDeleteHandler}>Delete</button>
+    <div className='expense-item'>
+   
+      {isEditing ? (
+        <EditItem key={id} cost={cost} date={date} name={name} id={id} onSave={handleEditSave} onCancel={handleEditCancel} />
+      ) : (
+        <>
+          <ExpenseDate date={date} />
+          <div className='expense-item__description'>
+            <h2>{name}</h2>
+            <div className='expense-item__price'>${cost}</div>
+          </div>
+          <div className='edit-delete-buttons'>
+            <button onClick={handleEditClick}>Edit</button>
+            <button onClick={itemDeleteHandler}>Delete</button>
+          </div>
+
+        </>
+      )}
+   
     </div>
-  )
-}
+  );
+};
 
 export default ExpenseItem;

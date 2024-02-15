@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import './ExpenseForm.css'
 
-
-const ExpenseForm = (props) => {
+//parent component: NewExpense
+const ExpenseForm = ({onSaveExpenseData, onCancel}) => {
     /* method 1(the best) and 3 is prefered because it is more commonly used and in method2, 
     state update depends on previous state, but as React schedules to update, we might got
     outdated previous state. while method 3 use functional form, always ensure get the lastest state snapshot
@@ -163,7 +163,7 @@ const ExpenseForm = (props) => {
         }
 
         //communicate up
-        props.onSaveExpenseData(expenseData);
+        onSaveExpenseData(expenseData);
         
         //set it blank after form submission
         setEnteredDate("");
@@ -189,7 +189,7 @@ const ExpenseForm = (props) => {
             </div>
         </div>
         <div className='new-expense__actions'>
-                <button type='button' onClick={props.onCancel}>Cancel</button>
+                <button type='button' onClick={onCancel}>Cancel</button>
                 <button type='submit'>Add Expense</button>{/**button default type is submit, can be overmi */}
         </div>
     </form>

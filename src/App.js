@@ -1,4 +1,4 @@
-
+import './App.css'
 import React, {useState} from 'react';
 import Expenses from './components/Expenses/Expenses';
 import NewExpense from './components/NewExpense/NewExpense';
@@ -57,6 +57,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1 className='project-title'>Expense Tracker</h1>
       <div>
         <NewExpense onAddExpense={addExpenseHandler}/>
 
@@ -66,6 +67,6 @@ function App() {
       </div>
     </div>
   );
-}
+} 
 
 export default App;

@@ -1,7 +1,8 @@
 import React from 'react'
 import Chart from '../Chart/Chart';
 
-export const ExpenseChart = (props) => {
+//parent component: expenses
+export const ExpenseChart = ({expenses}) => {
 
     const chartDataPoints = [
         {label: 'Jan', value: 0},
@@ -19,7 +20,7 @@ export const ExpenseChart = (props) => {
     ];
 
     //within same year, get total cost for each month, then pass data to Chart component
-    for(const expense of props.expenses){
+    for(const expense of expenses){
         const expenseMonth = expense.date.getMonth(); //new Date(2019, 8, 14) represents september, getMonth() return 8 and represent September.
         chartDataPoints[expenseMonth].value += expense.cost;
     }
