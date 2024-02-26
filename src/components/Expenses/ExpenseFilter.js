@@ -4,7 +4,9 @@ import './ExpenseFilter.css';
 //parent component: Expenses
 export const Filter = ({selected, onAddFilter}) => {
 
-    const selectHandler = (event) => {onAddFilter(event.target.value)}
+    const selectHandler = (event) => {
+      onAddFilter(event.target.value)
+    }
   return (
     <div className='expenses-filter'>
         <div className='expenses-filter__control'>

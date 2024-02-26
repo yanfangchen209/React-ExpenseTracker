@@ -36,11 +36,14 @@ function App() {
    * control.React UI libraries like React-Bootstrap, Material-UI, or others. */
 
   function itemDeleteHandler(goalId){
+    /*
     const deleteConfirm = window.confirm("Are you sure to delete this task?");
     if(deleteConfirm){
       setExpenseData(prevData => prevData.filter(expense => expense.id !== goalId));
     }
     //if cancel, do nothing.
+    */
+    
   }
   /**update only the properties that need to be changed while keeping the rest unchanged:
    * For each expense in the previous array, if the id matches the specified id, create a new 
