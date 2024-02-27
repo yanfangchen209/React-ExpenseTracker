@@ -1,4 +1,7 @@
-/* styles.css */
+/*z-index is a CSS property that controls the stacking order of positioned elements , 
+Elements with a higher z-index value are displayed in front of elements with lower z-index values.
+ If two elements have the same z-index, the one that comes later in the HTML source order will be 
+ on top.*/
 
 /* Backdrop */
 .backdrop {

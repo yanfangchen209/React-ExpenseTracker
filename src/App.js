@@ -62,7 +62,6 @@ function App() {
       <h1 className='project-title'>Expense Tracker</h1>
       <div>
         <NewExpense onAddExpense={addExpenseHandler}/>
-
       </div>
       <div>
         <Expenses data={expenseData} onEdit={editHandler} onDelete={itemDeleteHandler}/>

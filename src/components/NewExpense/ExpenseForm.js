@@ -159,6 +159,7 @@ const ExpenseForm = ({onSaveExpenseData, onCancel}) => {
         const expenseData = {
             date: new Date(enteredDate),
             name: enteredName,
+            //cost: parseFloat(enteredCost); in JavaScript, when you perform arithmetic operations (such as addition or subtraction) with a string that contains a numeric value
             cost: enteredCost
         }
 

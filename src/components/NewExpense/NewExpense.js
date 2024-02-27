@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './NewExpense.css'
 import ExpenseForm from './ExpenseForm';
+//import RefExpenseForm from './RefExpenseForm';
 
 //parent component: App
 function NewExpense({onAddExpense}){
@@ -28,7 +29,9 @@ function NewExpense({onAddExpense}){
 
 /*return conditional content */
   return (
+
     <div className='new-expense'>
+        {/**<RefExpenseForm onSaveExpenseData={saveExpenseDataHandler} />*/}
         {!isEditting && <button onClick={clickHandler}>Add New Expense</button>}
         {isEditting && <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} onCancel={stopEditingHandler} />}
     </div>
