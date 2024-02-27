@@ -3,6 +3,7 @@ import {useState} from 'react';
 import { ExpenseDate } from './ExpenseDate';
 import './ExpenseItem.css';
 import EditItem from './EditItem';
+import DeleteConfirmModal from './DeleteConfirmModal';
 
 //lift the state up
 
@@ -32,6 +33,7 @@ import EditItem from './EditItem';
 function ExpenseItem ({cost, date, name, id, onDelete, onEdit}){
 
   const [isEditing, setIsEditing] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -48,8 +50,20 @@ function ExpenseItem ({cost, date, name, id, onDelete, onEdit}){
 
 
   function itemDeleteHandler(){
-    onDelete(id)
+    setModalIsOpen(true);
   }
+
+  function onDeleteCancel(){
+    setModalIsOpen(false);
+  }
+
+  function itemDelete(){
+    onDelete(id);
+    //close modal overlay after delete item
+    setModalIsOpen(false);
+  }
+
+
 
 
   return (
@@ -71,6 +85,9 @@ function ExpenseItem ({cost, date, name, id, onDelete, onEdit}){
 
         </>
       )}
+      {
+        modalIsOpen && <DeleteConfirmModal onDeletion={itemDelete} onDeleteCancel={onDeleteCancel}/>
+      }
    
     </div>
   );
